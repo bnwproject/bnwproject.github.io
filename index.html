@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Snake Game</title>
+	<title>Collect the Soma</title>
+	<link rel="icon" type="image/x-icon" href="soma.png">
 	<style>
 		canvas {
 			border: 1px solid black;
@@ -10,71 +11,7 @@
 </head>
 <body>
 	<canvas id="canvas" width="400" height="400"></canvas>
-	<script>
-		// Set up the canvas context
-		const canvas = document.getElementById('canvas');
-		const ctx = canvas.getContext('2d');
-
-		// Set up the game board
-		const boardSize = 20;
-		const board = [];
-		for (let row = 0; row < boardSize; row++) {
-			const boardRow = [];
-			for (let col = 0; col < boardSize; col++) {
-				boardRow.push(0);
-			}
-			board.push(boardRow);
-		}
-
-		// Create the snake
-		let snake = [];
-		const initialSnakeLength = 3;
-		const initialSnakeX = Math.floor(boardSize / 2);
-		const initialSnakeY = Math.floor(boardSize / 2);
-		for (let i = 0; i < initialSnakeLength; i++) {
-			snake.push({ x: initialSnakeX, y: initialSnakeY + i });
-		}
-
-		// Set up the game loop
-		let lastTimestamp = 0;
-		const interval = 100;
-		const update = (timestamp) => {
-			if (timestamp - lastTimestamp >= interval) {
-				lastTimestamp = timestamp;
-
-				// Move the snake
-				const head = snake[0];
-				const tail = snake.pop();
-				const newHead = { x: head.x, y: head.y - 1 };
-				snake.unshift(newHead);
-
-				// Detect collisions
-				if (newHead.x < 0 || newHead.x >= boardSize || newHead.y < 0 || newHead.y >= boardSize) {
-					alert('Game over!');
-					return;
-				}
-				if (board[newHead.y][newHead.x] === 1) {
-					alert('Game over!');
-					return;
-				}
-
-				// Update the game board and snake
-				board[tail.y][tail.x] = 0;
-				board[newHead.y][newHead.x] = 1;
-			}
-
-			// Draw the game board and snake
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			const cellSize = canvas.width / boardSize;
-			for (let row = 0; row < boardSize; row++) {
-				for (let col = 0; col < boardSize; col++) {
-					if (board[row][col] === 1) {
-						ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-					}
-				}
-			}
-		};
-		requestAnimationFrame(update);
-	</script>
+	<script src="index.js"></script>
 </body>
 </html>
+
