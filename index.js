@@ -13,7 +13,8 @@
 		let soma = 100;
 		let somaCollected = 0; //for tracking when to make difficulty harder
 		let somaLossAmount = 1;
-		let die = false;
+		let die = true;
+		let variabletopreventyoufromcomingbacktolife = false;
 
 
 		// Set up the game loop
@@ -34,6 +35,7 @@
 		const update = (timestamp) => {
 			if (timestamp - lastTimestamp >= interval && die == false) {
 				lastTimestamp = timestamp;
+				variabletopreventyoufromcomingbacktolife = true;
 
 				// Move the square
 				if (direction === 'up') {
@@ -47,9 +49,13 @@
 				}
 
 				// Draw the square
+				let img2 = new Image();
+				let img3 = new Image();
+				img2.src = 'https://bnwproject.github.io/worldstatecitizen-removebg-preview.png';
+				img3.src = 'https://bnwproject.github.io/worldstatecitizensad-removebg-preview.png';
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
-				ctx.fillStyle = 'blue';
-				ctx.fillRect(x, y, squareSize, squareSize);
+				//ctx.fillRect(x, y, squareSize, squareSize);
+				ctx.drawImage(img2, x, y, squareSize, squareSize);
 				
 				// soma
 				let img = new Image();
@@ -86,6 +92,20 @@
 				//timer go down
 				soma -= somaLossAmount;
 				
+				//check to see if hit wall
+				if (x <= 0) {
+					x = 5;
+				}
+				if (y <= 0) {
+					y = 5;
+				}
+				if (x >= 340) {
+					x = 345;
+				}
+				if (y >= 340) {
+					y = 345;
+				}
+				
 				//check to make harder
 				if (somaCollected > 50) {
 					somaLossAmount = 6;
@@ -107,12 +127,15 @@
 					somaLossAmount = 2;
 					speed = 15;
 					ctx.strokeText("Soma addiction: +20%", 5, canvas.height-5);
+				} else if (somaCollected >= 0) {
+					ctx.strokeText("Soma addiction: 0%", 5, canvas.height-5);
 				}
 					
 				//check if die
 				if (soma < 0) {
 					die = true;
 					ctx.strokeText("You ran out of soma", canvas.width/2-80, canvas.height/2+100);
+					ctx.drawImage(img3, x, y, squareSize, squareSize);
 				}
 			}
 
@@ -129,5 +152,19 @@
 			soma = 100;
 			somaCollected++;
 		}
+		
+		
+		
+		//click to begin!
+		let img4 = new Image();
+		img4.src = 'https://bnwproject.github.io/collectthesoma400x400.png';
+		ctx.drawImage(img4, 0, -15, 400, 400);
+		ctx.font = "36px Arial";
+		ctx.fillText("Click anywhere to begin!", 0, canvas.height-8);
+		canvas.addEventListener("click", function(event) {
+    		if (variabletopreventyoufromcomingbacktolife == false) {
+				die = false;
+			}
+  		});
 		
 		window.requestAnimationFrame(update);
