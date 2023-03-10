@@ -166,6 +166,7 @@
 			ctx.fillStyle = "black";
 			ctx.fillText("Click anywhere to begin!", 0, canvas.height-8);
 		}
+		var intervalSet = setInterval(setIntervalStuff, 200);
 		canvas.addEventListener("click", function(event) {
     		if (variabletopreventyoufromcomingbacktolife == false) {
 				die = false;
