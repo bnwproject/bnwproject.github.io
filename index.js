@@ -158,9 +158,14 @@
 		//click to begin!
 		let img4 = new Image();
 		img4.src = 'https://bnwproject.github.io/collectthesoma400x400.png';
-		ctx.drawImage(img4, 0, -15, 400, 400);
-		ctx.font = "36px Arial";
-		ctx.fillText("Click anywhere to begin!", 0, canvas.height-8);
+		function setIntervalStuff() {
+			ctx.fillStyle = "white";
+			ctx.fillRect(0,0,400,400);
+			ctx.drawImage(img4, 0, -15, 400, 400);
+			ctx.font = "36px Arial";
+			ctx.fillStyle = "black";
+			ctx.fillText("Click anywhere to begin!", 0, canvas.height-8);
+		}
 		canvas.addEventListener("click", function(event) {
     		if (variabletopreventyoufromcomingbacktolife == false) {
 				die = false;
