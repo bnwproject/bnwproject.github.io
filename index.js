@@ -77,6 +77,7 @@
 					ctx.fillStyle = 'red';
 				}
 				ctx.fillRect(10, 25, soma*3.7, 20);
+				ctx.strokeRect(10, 25, 370, 20);
 				
 				
 				if ((x > somaX-50 && x < somaX+50)&&(y > somaY-50 && y < somaY+50)) {
@@ -86,27 +87,32 @@
 				soma -= somaLossAmount;
 				
 				//check to make harder
-				if (somaCollected > 25) {
-					somaLossAmount = 2;
+				if (somaCollected > 50) {
+					somaLossAmount = 6;
+					speed = 50;
 					ctx.strokeText("Soma addiction: +100%", 5, canvas.height-5);
-				} else if (somaCollected > 20) {
-					somaLossAmount = 1.8;
+				} else if (somaCollected > 35) {
+					somaLossAmount = 5;
+					speed = 40;
 					ctx.strokeText("Soma addiction: +80%", 5, canvas.height-5);
-				} else if (somaCollected > 15) {
-					somaLossAmount = 1.6;
+				} else if (somaCollected > 20) {
+					somaLossAmount = 4;
+					speed = 30;
 					ctx.strokeText("Soma addiction: +60%", 5, canvas.height-5);
 				} else if (somaCollected > 10) {
-					somaLossAmount = 1.4;
+					somaLossAmount = 3;
+					speed = 20;
 					ctx.strokeText("Soma addiction: +40%", 5, canvas.height-5);
 				} else if (somaCollected > 5) {
-					somaLossAmount = 1.2;
+					somaLossAmount = 2;
+					speed = 15;
 					ctx.strokeText("Soma addiction: +20%", 5, canvas.height-5);
 				}
 					
 				//check if die
 				if (soma < 0) {
 					die = true;
-					ctx.strokeText("You ran out of soma", canvas.width/2, canvas.height/2);
+					ctx.strokeText("You ran out of soma", canvas.width/2-80, canvas.height/2+100);
 				}
 			}
 
