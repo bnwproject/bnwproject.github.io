@@ -170,6 +170,7 @@
 		canvas.addEventListener("click", function(event) {
     		if (variabletopreventyoufromcomingbacktolife == false) {
 				die = false;
+				clearInterval(intervalSet);
 			}
   		});
 		
